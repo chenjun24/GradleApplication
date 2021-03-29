@@ -1,0 +1,45 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    repositories {
+        google()
+        jcenter()
+        maven {//本地Maven仓库地址
+            url uri('D:/repos')
+        }
+
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:4.1.1"
+        classpath 'com.hc.plugin:ThirdPlugin:1.0.0'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+println 'project build.gradle'
+//自定义插件第一方式 build script 直接在已有build.gradle中编写源码
+class TheFirstPlugin implements Plugin<Project>{
+
+    @Override
+    void apply(Project project) {
+        println 'First plugin executed'
+         //建一个task
+        project.task('hello'){
+            doLast {
+                println 'hello from first plugin'
+            }
+        }
+    }
+}
+//引入自定义插件
+apply plugin:TheFirstPlugin

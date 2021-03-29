@@ -1,0 +1,2 @@
+com/ci/plugin/MyPlugin.java
+ com.ci.plugin.MyPlugin
